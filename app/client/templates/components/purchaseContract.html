@@ -1,0 +1,71 @@
+<template name="components_purchaseContract">
+    <div class="panel panel-info panel-dapp">
+        <div class="panel-heading" style="font-size:18px;padding: 4px 15px;">
+            {{i18n 'dapp.components.purchaseContract.header'}}
+	
+        </div>
+        <div class="panel-body" style="padding: 5px 15px;">
+            {{#with TemplateVar.get 'state'}}
+                {{#if isError}}
+                    <div class="alert alert-warning">
+                        There was an error deploying your contract.
+                        The error was: "{{error}}".
+                    </div>
+                {{/if}}
+            
+                {{#if isMining}}
+                    <div class="alert alert-info">
+                        Your contract is being mined...
+                        <span class="badge text-right">
+                            <i class="fa fa-cog fa-spin"></i>
+                        </span>
+                    </div>
+                {{/if}}
+            
+                {{#if isMined}}
+                    <div class="alert alert-success">
+                        Your contract has been mined!
+                    </div>
+                    <hr />
+            
+                    <label>
+                        Your contract has been deployed to this address:
+                    </label>
+            
+                    <input type="text" class="form-control" 
+                           value="{{address}}" placeholder="Address" />
+            
+                    <br />
+            	{{/if}}
+
+                  
+            
+                
+                   <!-- <p class="well well-info">
+                        {{i18n 'dapp.components.purchaseContract.description'}}
+                    </p>-->
+					<div class="row">
+						<div class="col-sm-3">
+						<input type="radio" name="r"><span style="padding:10px">Customer Invoice</span> 
+						</div>
+						<div class="col-sm-3">
+						<input type="radio" name="r"><span style="padding:10px"> Suppiler Invoice</span> 
+						</div>
+						<div class="col-sm-3">
+						<input type="radio" name="r"><span style="padding:10px">Credit Memo</span> 
+						</div>
+						<div class="col-sm-3">
+						{{#if isInactive}}
+						<button type="button" class="btn btn-info btn-deploy">{{i18n 'dapp.components.purchaseContract.create'}}</button>
+						{{/if}}
+						</div>
+					</div>
+            
+                    <!--<button type="button" class="btn btn-info btn-deploy">
+                        {{i18n 'dapp.components.purchaseContract.create'}}
+                    </button>-->
+                
+            {{/with}}
+        </div>
+    </div>
+</template>

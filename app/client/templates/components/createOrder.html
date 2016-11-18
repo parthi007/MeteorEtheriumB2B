@@ -1,0 +1,184 @@
+<template name="components_createOrder">
+<div class="panel panel-info panel-dapp">
+        <div class="panel-heading" style="font-size:18px;padding: 4px 15px;">
+            {{i18n 'dapp.components.createOrder.header'}}
+        </div>
+        <div class="panel-body" style="padding: 5px 15px;">
+		{{#with TemplateVar.get 'status'}}
+		        <!--{{#if notyet}}
+		            <div class="alert alert-info">
+				Please create an invoice by entering all the fields below.
+		            </div>
+		        {{/if}}-->
+
+			{{#if erred}}
+		            <div class="alert alert-warning">
+				There was an error when creating new invoice. Error is: "{{error}}"
+		            </div>
+		        {{/if}}
+
+			{{#if initiated}}
+		            <div class="alert alert-success">
+				The invoice has been initiated successfully. The transaction address is:
+				"{{result}}" . Please wait until mining is completed...
+				<span class="badge text-right">
+                            <i class="fa fa-cog fa-spin"></i>
+                        </span>
+		            </div>
+		        {{/if}}
+				{{#if isMined}}
+		            <div class="alert alert-success">
+				The invoice has been mined successfully.
+		            </div>
+		        {{/if}}
+
+		{{/with}}
+
+		
+		
+		<!--<input type="text" id="contractAddress" class="form-control" value="{{contractAddr}}" placeholder="Contract Address" />
+		<br/>
+		<select id="category-select" class="form-control">
+			<option disabled="disabled" selected="selected">Please Select Buyer</option> 
+			<option value="0x083a789cd1939c91ec366960ee77f6b0930cfb9b">Demo Corp</option>
+		</select>
+		
+		<br/>
+		<select id="category-select1" class="form-control">
+			<option disabled="disabled" selected="selected">Please Select Approver</option> 
+			<option value="0x54f57ee30be11c8ecb561ae71522a2dc32d6e712">Demo Corp - Purchase Controller</option>
+		</select>
+		
+		<br/>
+		<input type="text" id="purchaseValue" class="form-control" value="" placeholder="Invoice Value" />
+		<br/>
+		<button type="button" id="createOrderbtn" class="btn btn-info btn-deploy">{{i18n 'dapp.components.createOrder.create'}}</button>-->
+				<div class="row">
+				<form class="form-horizontal">
+				<div class="form-group">
+				<label for="contractAddress" class="col-sm-2 control-label">Invoice Address</label>
+				<div class="col-sm-5">
+					<input type="text" id="contractAddress" class="form-control" value="{{contractAddr}}" placeholder="Contract Address" />
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label for="category-select" class="col-sm-2 control-label">Customer Name</label>
+				<div class="col-sm-3">
+					<select id="category-select" class="form-control">
+						<option disabled="disabled" selected="selected">Please Select Buyer</option> 
+						<option value="0x083a789cd1939c91ec366960ee77f6b0930cfb9b">Demo Corp</option>
+					</select>
+				</div>
+			  </div>
+					
+			  <div class="form-group">
+				<label for="category-select1" class="col-sm-2 control-label">Purchase Approver</label>
+				<div class="col-sm-3">
+					<select id="category-select1" class="form-control">
+						<option disabled="disabled" selected="selected">Please Select Approver</option> 
+						<option value="0x54f57ee30be11c8ecb561ae71522a2dc32d6e712">Demo Corp - Purchase Controller</option>
+					</select>
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label for="purchaseValue" class="col-sm-2 control-label">Invoice Value</label>
+				<div class="col-sm-3">
+					<input type="text" id="purchaseValue" class="form-control" value="" placeholder="Invoice Value" />
+				</div>
+			  </div>
+
+		</form>	
+</div>
+		<div class="row">
+				<div class="col-md-6">
+				
+					<div class="well well-lg" style="background-color:white">
+							<form class="form-horizontal">
+			  <div class="form-group">
+				<label for="shref" style="padding-right:31px" class="col-sm-4 control-label">Shipment Reference</label>
+				<div class="col-sm-6" style="padding:0">
+					<input type="text" id="shref" class="form-control" value="SH001274569" placeholder="" />
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label for="shloc" style="padding-right:31px" class="col-sm-4 control-label">Shipment Location</label>
+				<div class="col-sm-6" style="padding:0">
+					<input type="text" id="shloc" class="form-control" value="Central Warehouse - TX"  placeholder="" />
+				</div>
+			  </div>
+					
+			  <div class="form-group">
+				<label for="desc" style="padding-right:31px" class="col-sm-4 control-label">Product Description</label>
+				<div class="col-sm-6" style="padding:0">
+					<input type="text"  id="desc" class="form-control" value="All-In-One Printers"/>
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label for="quantity" style="padding-right:31px" class="col-sm-4 control-label">Product Quantity</label>
+				<div class="col-sm-6" style="padding:0">
+					<input type="text"  id="quantity" class="form-control" value="25"/>
+				</div>
+			  </div>
+
+		</form>	
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="well well-lg" style="background-color:white">
+					
+					
+					<form class="form-horizontal">
+			  <div class="form-group">
+				<label for="shref" style="padding-right:31px" class="col-sm-4 control-label">Purchase Order Reference</label>
+				<div class="col-sm-6" style="padding:0">
+					<input type="text" id="shref" class="form-control" value="P02215678" placeholder="" />
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label for="shloc" style="padding-right:31px" class="col-sm-4 control-label">Purchase Order Date</label>
+				<div class="col-sm-6" style="padding:0">
+					<input type="text" id="purchasedate" class="form-control" value="11/10/2016"  placeholder="" />
+				</div>
+			  </div>
+					
+			  <div class="form-group">
+				<label for="desc" style="padding-right:31px" class="col-sm-4 control-label">Payment Terms</label>
+				<div class="col-sm-6" style="padding:0">
+					<input type="text"  id="desc" class="form-control" value="Net 30"/>
+				</div>
+			  </div>
+			 
+
+		</form>	
+					
+					
+					</div>
+					<div class="col-md-6" style="padding: 0;position: relative;top: -7px;">
+					<button type="button" id="createOrderbtn" class="btn btn-info btn-deploy">{{i18n 'dapp.components.createOrder.create'}}</button>
+					</div>
+				</div>
+		</div>	
+		
+	</div>
+</div>
+<script type="text/javascript">
+var date = new Date();
+var yesterday = new Date(new Date().getTime() - 24 * 60 * 60 * 1000);
+var threedayearlier = new Date(new Date().getTime() - 24 * 60 * 60 * 1000 * 3);
+
+
+var day = date.getDate();
+var month = date.getMonth() + 1;
+var year = date.getFullYear();
+
+
+if (month < 10) month = "0" + month;
+if (day < 10) day = "0" + day;
+
+
+
+
+var today = month + "/" + day + "/" + year;
+document.getElementById("purchasedate").value = (threedayearlier.getMonth() + 1) + "/" + threedayearlier.getDate() + "/" + threedayearlier.getFullYear();
+</script>
+</template>
